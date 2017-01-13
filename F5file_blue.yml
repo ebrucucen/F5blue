@@ -148,4 +148,4 @@
             validate_certs: "false"
         with_items:
             - blue01
-            - blue02 
+            - blue02
