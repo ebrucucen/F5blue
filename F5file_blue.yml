@@ -77,14 +77,14 @@
             monitors:
               - /Common/http
 
-      - name: Add members into gw_pool
+      - name: Add members into blue_green_pool
         bigip_pool_member:
             server: "{{ inventory_hostname }}"
             user: "{{username}}"
             password: "{{password}}"
             state: "present"
             host: "{{ item }}"
-            pool: "gw_pool"
+            pool: "blue_green_pool"
             port: "80"
             validate_certs: "false"
         with_items:
@@ -103,10 +103,10 @@
             src: "irule-sorry.tcl"
             validate_certs: "no"
 
-      - name: Create a VIP
+      - name: Create a blue green VIP
         bigip_virtual_server:
             server: "{{ inventory_hostname }}"
-            description: "generic web VIP"
+            description: "blue green VIP"
             destination: "10.0.2.183"
             user: "{{username}}"
             password: "{{password}}"
